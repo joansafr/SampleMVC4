@@ -1,0 +1,50 @@
+﻿@model MVCDemo.Models.Alumno
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Alumno</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CodigoAlumno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodigoAlumno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApellidoParterno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApellidoParterno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApellidoMaterno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApellidoMaterno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TelefonoMovil)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TelefonoMovil)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

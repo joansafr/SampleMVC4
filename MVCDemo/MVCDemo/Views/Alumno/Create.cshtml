@@ -1,0 +1,68 @@
+﻿@model MVCDemo.Models.Alumno
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Alumno</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CodigoAlumno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CodigoAlumno)
+            @Html.ValidationMessageFor(model => model.CodigoAlumno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApellidoParterno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApellidoParterno)
+            @Html.ValidationMessageFor(model => model.ApellidoParterno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApellidoMaterno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApellidoMaterno)
+            @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TelefonoMovil)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TelefonoMovil)
+            @Html.ValidationMessageFor(model => model.TelefonoMovil)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

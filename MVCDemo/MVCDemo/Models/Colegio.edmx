@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="COLEGIOModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="COLEGIOModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="COLEGIOModel.Store.Alumno" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Asistencia" EntityType="COLEGIOModel.Store.Asistencia" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Asistencia_Alumno" Association="COLEGIOModel.Store.FK_Asistencia_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Asistencia" EntitySet="Asistencia" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="CodigoAlumno" />
+          </Key>
+          <Property Name="CodigoAlumno" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoParterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoMovil" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="CodigoAsistencia" />
+          </Key>
+          <Property Name="CodigoAsistencia" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoAlumno" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Comentario" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Asistencia_Alumno">
+          <End Role="Alumno" Type="COLEGIOModel.Store.Alumno" Multiplicity="1" />
+          <End Role="Asistencia" Type="COLEGIOModel.Store.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="CodigoAlumno" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="CodigoAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="COLEGIOModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="COLEGIOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnoes" EntityType="COLEGIOModel.Alumno" />
+          <EntitySet Name="Asistencias" EntityType="COLEGIOModel.Asistencia" />
+          <AssociationSet Name="FK_Asistencia_Alumno" Association="COLEGIOModel.FK_Asistencia_Alumno">
+            <End Role="Alumno" EntitySet="Alumnoes" />
+            <End Role="Asistencia" EntitySet="Asistencias" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="CodigoAlumno" />
+          </Key>
+          <Property Name="CodigoAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoParterno" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TelefonoMovil" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Asistencias" Relationship="COLEGIOModel.FK_Asistencia_Alumno" FromRole="Alumno" ToRole="Asistencia" />
+        </EntityType>
+        <EntityType Name="Asistencia">
+          <Key>
+            <PropertyRef Name="CodigoAsistencia" />
+          </Key>
+          <Property Name="CodigoAsistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoAlumno" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Comentario" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Alumno" Relationship="COLEGIOModel.FK_Asistencia_Alumno" FromRole="Asistencia" ToRole="Alumno" />
+        </EntityType>
+        <Association Name="FK_Asistencia_Alumno">
+          <End Role="Alumno" Type="COLEGIOModel.Alumno" Multiplicity="1" />
+          <End Role="Asistencia" Type="COLEGIOModel.Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="CodigoAlumno" />
+            </Principal>
+            <Dependent Role="Asistencia">
+              <PropertyRef Name="CodigoAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="COLEGIOModelStoreContainer" CdmEntityContainer="COLEGIOEntities">
+          <EntitySetMapping Name="Alumnoes">
+            <EntityTypeMapping TypeName="COLEGIOModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoParterno" ColumnName="ApellidoParterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="TelefonoMovil" ColumnName="TelefonoMovil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asistencias">
+            <EntityTypeMapping TypeName="COLEGIOModel.Asistencia">
+              <MappingFragment StoreEntitySet="Asistencia">
+                <ScalarProperty Name="CodigoAsistencia" ColumnName="CodigoAsistencia" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
